@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static',filename='login.css')}}"
+    />
+    <title>Login in</title>
+  </head>
+  <body>
+    <div class="container mt-5 px-5 py-5">
+      <div class="row">
+        <h1>Login</h1>
+      </div>
+      <div class="row">
+        <div class="col">
+          <form action="/log" method="POST">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" name="email" class="form-control" />
+              <label class="form-label" for="email">Email address</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" name="pwd" class="form-control" />
+              <label class="form-label" for="pwd">Password</label>
+            </div>
+
+            <div class="row mb-4">
+              <label class="form-label" for="hsp_val">Hospital</label>
+              <input type="checkbox" name="hsp_val" />
+            </div>
+            <div class="row mb-4">
+              <label class="form-label" for="usr_val">User</label>
+              <input type="checkbox" name="usr_val" />
+            </div>
+            <button
+              onclick='location.href="/signup"'
+              type="button"
+              class="btn btn-primary btn-block"
+            >
+              Sign Up for User
+            </button>
+            <button
+              onclick='location.href="/hspsignup"'
+              type="button"
+              class="btn btn-primary btn-block"
+            >
+              Sign Up for Hospital
+            </button>
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">
+              login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

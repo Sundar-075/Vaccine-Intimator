@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{url_for('static',filename='bootstrap.min.css')}}"
+    />
+
+    <title>Hospital panel</title>
+  </head>
+  <body>
+    <div class="land-fluid">
+      <div class="land-title text-center">
+        <h1 class="pt-4">SIGNUP</h1>
+      </div>
+      <div class="container border border-light rounded">
+        <div class="row">
+          <form action="/hspsignform" method="POST">
+            <div class="row mb-3">
+              <div class="col">
+                <label for="h-name">Hospital Name</label>
+                <input
+                  name="h-name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Hospital Name"
+                />
+              </div>
+              <div class="col">
+                <label for="email">Email</label>
+                <input
+                  name="email"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Email"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="address">Address</label>
+                <input
+                  name="address"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Address"
+                />
+              </div>
+              <div class="col">
+                <label for="location">Location</label>
+                <input
+                  name="location"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter location or City"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="state">State</label>
+                <input
+                  name="state"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter State"
+                />
+              </div>
+              <div class="col">
+                <label for="phno">Contact Number</label>
+                <input
+                  name="phno"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Contact Number"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="password">Password</label>
+                <input
+                  name="password"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Password"
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
