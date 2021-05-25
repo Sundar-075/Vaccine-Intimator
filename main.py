@@ -1,5 +1,5 @@
 import datetime
-import re
+import os
 from flask import Flask, render_template, request, session, redirect, g, url_for
 from os import urandom
 from pymongo import MongoClient
@@ -9,9 +9,11 @@ from bson.json_util import dumps, loads
 
 app = Flask(__name__)
 app.secret_key = urandom(30)
+SECRET_KEY = os.getenv('SECRET_KEY')
+DB_NAME = os.getenv('DB_NAME')
 
 client = MongoClient(
-    "mongodb+srv://tony:Mark51@cluster0.2oz9x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    "mongodb+srv://DB_NAME:SECRET_KEY@cluster0.2oz9x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 profiles = client["Profiles"]
 user_collection = profiles["test"]
