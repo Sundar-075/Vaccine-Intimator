@@ -44,33 +44,61 @@
     <!-- Optional JavaScript; choose one of the two! -->
     <section>
       <div class="container table-responsive">
+        <form action="/edit" method="POST">   
         <table class="table table-striped table-bordered text-center">
           <tr>
             <th>Age(m)</th>
             <th>Vaccine Name</th>
             <th>Hospitals</th>
+            <th>Click</th>
           </tr>
           {% for data in vaccine_val %}
           <tr style="vertical-align: middle">
             <td rowspan="{{data['Vaccine_name']|length+1}}">{{ data['age'] }}</td>
             {% for i in data["Vaccine_name"] %}
-            <tr>
-              <td>{{ i }}</td>
-              <td>
-                {% if i in vac_hsp %}
-                  {% for j in vac_hsp[i] %}
-                    {{ j[1]+"," }}
-                  {% endfor %}
-                {% else %}
-                  Not available
-                {% endif %}
-              </td>
-            </tr>
+              {% if i not in done %}
+                <tr>
+                  <td>{{ i }}</td>
+                  <td>
+                    {% if i in vac_hsp %}
+                      {% for j in vac_hsp[i] %}
+                        <button class="btn" name="hsp_info_name"  type="submit" value ="{{ j[0] }}">{{ j[1]}}</button>
+                      {% endfor %}
+                    {% else %}
+                      Not available
+                    {% endif %}
+                  </td>
+                  <td>
+                    <input type="checkbox" name="mycheckbox" value="{{i}}"  />
+                  </td>
+                </tr>
+              {% else %}
+              <tr>
+                <td><del>{{ i }}</del></td>
+                <td>
+                  {% if i in vac_hsp %}
+                    {% for j in vac_hsp[i] %}
+                      <button class="btn" name="hsp_info_name" type="submit" value ="{{ j[0] }}"><del>{{ j[1] }}</del></button>
+                    {% endfor %}
+                  {% else %}
+                    <del>Not available</del>
+                  {% endif %}
+                </td>
+                <td>
+                  <input type="checkbox" name="mycheckbox" value="{{i}}" disabled />
+                </td>
+              </tr>
+              {% endif %}
             {% endfor %}
           </tr>
 
           {% endfor %}
         </table>
+        <div class="float-right">
+          <button type="submit"  class="btn btn-primary float-right">Save Changes</button>
+        </div>
+        
+      </form>
       </div>
     </section>
 

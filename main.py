@@ -1,5 +1,6 @@
 import datetime
 import os
+import re
 from flask import Flask, render_template, request, session, redirect, g, url_for
 from os import urandom
 from pymongo import MongoClient
@@ -13,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DB_NAME = os.getenv('DB_NAME')
 
 client = MongoClient(
-    "mongodb+srv://DB_NAME:SECRET_KEY@cluster0.2oz9x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    "mongodb+srv://tony:Mark51@cluster0.2oz9x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 profiles = client["Profiles"]
 user_collection = profiles["test"]
@@ -155,8 +156,8 @@ def panel():
         vac_values = loads(dumps(vaccines.vaccine_info.find(
             {'age': {'$lt': find+1}, 'y/m': cat}, {'Vaccine_name': 1, 'age': 1, "_id": 0})))
 
-        p_name, email = values['first_name']+" " + \
-            values["last_name"], values["emai_id"]
+        p_name, email, done = values['first_name']+" " + \
+            values["last_name"], values["emai_id"], values['done']
         for data in vac_values:
             val = data["Vaccine_name"]
             val = val[1:-1]
@@ -176,18 +177,43 @@ def panel():
                 elif len(hs) == 1:
                     vac_hsp[i] = vac_hsp.get(
                         i, [])+[[hs[0]['email'], hs[0]['h_name']]]
-        return render_template("landing_page.html", name=p_name, email=email, vaccine_val=vac_values, vac_hsp=vac_hsp)
+
+        return render_template("landing_page.html", name=p_name, email=email, vaccine_val=vac_values, vac_hsp=vac_hsp, done=done)
 
     return redirect(url_for('login'))
 
 
-@ app.route("/logout")
+@app.route("/edit", methods=["GET", "POST"])
+def edit():
+    if request.method == "POST":
+        if "mycheckbox" in request.form:
+            ed_list = request.form.getlist("mycheckbox")
+            profiles.user_collection.update(
+                {'emai_id': session['user']},
+                {'$push': {'done': {'$each': ed_list}}}
+            )
+        elif "hsp_info_name" in request.form:
+            hsp_name = request.form.get("hsp_info_name")
+            return redirect(url_for('hspinfo', val=hsp_name))
+
+    return redirect(url_for('panel'))
+
+
+@app.route("/hspinfo")
+def hspinfo():
+    hsp_val = hsp_prof.hsp_info.find_one({'email': request.args.get('val')})
+    usr_val = profiles.user_collection.find_one({'emai_id': session['user']}, {
+                                                'first_name': 1, 'last_name': 1})
+    return render_template("hsp_info.html", hsp_val=hsp_val, name=usr_val['first_name']+" "+usr_val['last_name'])
+
+
+@app.route("/logout")
 def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
 
 
-@ app.before_request
+@app.before_request
 def before_request():
     g.user = None
 
