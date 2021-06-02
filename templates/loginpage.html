@@ -28,25 +28,30 @@
         <div class="col">
           <form action="/log" method="POST">
             <!-- Email input -->
-            <div class="form-outline mb-4">
+            <div class="form-outline">
               <input type="email" name="email" class="form-control" />
               <label class="form-label" for="email">Email address</label>
             </div>
 
             <!-- Password input -->
-            <div class="form-outline mb-4">
+            <div class="form-outline">
               <input type="password" name="pwd" class="form-control" />
               <label class="form-label" for="pwd">Password</label>
             </div>
 
-            <div class="row mb-4">
+            <div class="row">
+              <div>
+                <input type="checkbox" name="hsp_val" />
+              </div>
               <label class="form-label" for="hsp_val">Hospital</label>
-              <input type="checkbox" name="hsp_val" />
             </div>
-            <div class="row mb-4">
+            <div class="row">
+              <div>
+                <input type="checkbox" name="usr_val" />
+              </div>
               <label class="form-label" for="usr_val">User</label>
-              <input type="checkbox" name="usr_val" />
             </div>
+
             <button
               onclick='location.href="/signup"'
               type="button"
