@@ -42,6 +42,50 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="/static/js/bootstrap.bundle.min.js"></script>
 
+    <section>
+      <div class="container">
+        <div class="row">
+          <h1>{{ hsp_val['h_name'] }}</h1>
+        </div>
+
+        <div class="row">
+          <h3>Email : {{hsp_val['email']}}</h3>
+          <br />
+          <h3>Contact Number : {{hsp_val['phno']}}</h3>
+        </div>
+
+        <div class="row">
+          <address>
+            <h4>
+              {{hsp_val['address']}}<br />
+              {{hsp_val['location']}}<br />
+              {{hsp_val['state']}}<br />
+            </h4>
+          </address>
+        </div>
+
+        <div class="row">
+          <h5>Vaccines Available:</h5>
+          <ul class="px-3 list-group list-unstyled">
+            {% for vac in hsp_val['list_vaccines'] %}
+            <li><strong>{{ vac }}</strong></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="row">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.5808254624126!2d83.30698615042266!3d17.717251187822203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3943169c8fac4f%3A0xf0b4c66e5ecb574f!2sApollo%20Hospitals%20Ramnagar%20Vizag!5e0!3m2!1sen!2sin!4v1622616779911!5m2!1sen!2sin"
+            width="400"
+            height="300"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
