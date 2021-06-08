@@ -51,6 +51,7 @@
             <th>Vaccine Name</th>
             <th>Hospitals</th>
             <th>Click</th>
+            <th>Un Click</th>
           </tr>
           {% for data in vaccine_val %}
           <tr style="vertical-align: middle">
@@ -71,6 +72,9 @@
                   <td>
                     <input type="checkbox" name="mycheckbox" value="{{i}}"  />
                   </td>
+                  <td>
+                    <input type="checkbox" name="mycheckbox_un" value="{{i}}"  disabled />
+                  </td>
                 </tr>
               {% else %}
               <tr>
@@ -86,6 +90,9 @@
                 </td>
                 <td>
                   <input type="checkbox" name="mycheckbox" value="{{i}}" disabled />
+                </td>
+                <td>
+                  <input type="checkbox" name="mycheckbox_un" value="{{i}}"   />
                 </td>
               </tr>
               {% endif %}

@@ -1,0 +1,133 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static',filename='Style.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <a class="navbar-brand logo" href="/"
+        ><span class="head-nav-style">Vaccine Intimator</span></a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-link active" href="#"
+            >Home <span class="sr-only">(current)</span></a
+          >
+          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="/login">Login/Register</a>
+        </div>
+      </div>
+    </nav>
+    <div class="bg-container pt-5 pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-6 order-md-1">
+            <div class="d-flex justify-content-center mt-5 mb-5 ml-5">
+              <img
+                class="img"
+                src="https://res.cloudinary.com/killuax27/image/upload/v1623156681/vacc/cartoon-vaccination-campaign-illustration_52683-62384_nnctfx.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div
+            class="
+              col-12 col-md-6
+              order-md-0
+              d-flex
+              flex-column
+              justify-content-center
+            "
+          >
+            <h1 class="head">Vaccine Importance</h1>
+            <p class="paragraph-styles">
+              In this contemporary world of deadly viruses it is of the utmost
+              priority to know the benevolent factors of the vaccines.Vaccines
+              build up your immune system and fabricate a strong immune system
+              overtime when taken at the right time.<br />
+              The absence of the knowledge about the vaccine can lead to drastic
+              problems in one's life.We intend to provide a platform which can
+              aid you to know the vaccines that a baby needs inorder to lead a
+              healthy and hassle free life.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-container pt-5 pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-6 order-md-1">
+            <div class="d-flex justify-content-center mt-5 mb-5 mr-5">
+              <img
+                class="img"
+                src="https://res.cloudinary.com/killuax27/image/upload/v1623157161/vacc/teamwork-concept-landing-page_52683-20164_zblwdy.jpg"
+              />
+            </div>
+          </div>
+          <div
+            class="
+              col-12 col-md-6
+              order-md-1
+              d-flex
+              flex-column
+              justify-content-center
+            "
+          >
+            <h1 class="head">About Us</h1>
+            <p class="paragraph-styles">
+              This website aims to provide the vaccines to be taken at the right
+              age along with the availability at a nearby hospital.We also have
+              accounts for hospitals to update the availability.If you are a
+              corresponding officer regarding the vaccines in a particular
+              hospital you can have an account for your hospital. For further
+              details login or register .
+            </p>
+            <div>
+              <button class="btn btn-info">Contact Us</button>
+              <button class="btn btn-info" onclick="location.href='/login'">
+                Login/Register
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
