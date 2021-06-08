@@ -1,6 +1,8 @@
 import datetime
 import os
-import re
+from re import sub
+import smtplib
+from email.message import EmailMessage
 from flask import Flask, render_template, request, session, redirect, g, url_for
 from os import urandom
 from pymongo import MongoClient
@@ -30,7 +32,21 @@ today = date.today()
 
 @app.route("/")
 def home():
-    return "Hello"
+    body = "It seems like you have delayed your vaccination. Please get yourself or your offspring vaccinated. Thank you :)"
+    subject = "Remainder for vaccination"
+    msg = EmailMessage()
+    msg['subject'] = subject
+    msg.set_content(body)
+    msg['to'] = "jkarunakar57@gmail.com"
+    user = "sundarsai364@gmail.com"
+    msg['from'] = user
+    password = "luoowuavjstxrifp"
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    # server.starttls()
+    # server.login(user, password)
+    # server.send_message(msg)
+    # server.quit()
+    return render_template("index.html")
 
 
 @app.route("/login")
@@ -122,8 +138,9 @@ def hsppanel():
         # hsp_name['list_vaccines'].append(i)
 
         # hsp_prof.hsp_info.replace_one({'email': session['user']}, hsp_name)
+        print(hsp_name)
 
-        return render_template("hospital_land.html",)
+        return render_template("hospital_land.html", val=hsp_name)
     return redirect(url_for('login'))
 
 
@@ -192,7 +209,11 @@ def edit():
                 {'emai_id': session['user']},
                 {'$push': {'done': {'$each': ed_list}}}
             )
-        elif "hsp_info_name" in request.form:
+        if "mycheckbox_un" in request.form:
+            uned_list = request.form.getlist("mycheckbox_un")
+            profiles.user_collection.update({'emai_id': session['user']}, {
+                                            '$pull': {'done': {'$in': uned_list}}})
+        if "hsp_info_name" in request.form:
             hsp_name = request.form.get("hsp_info_name")
             return redirect(url_for('hspinfo', val=hsp_name))
 
@@ -205,6 +226,36 @@ def hspinfo():
     usr_val = profiles.user_collection.find_one({'emai_id': session['user']}, {
                                                 'first_name': 1, 'last_name': 1})
     return render_template("hsp_info.html", hsp_val=hsp_val, name=usr_val['first_name']+" "+usr_val['last_name'])
+
+
+@app.route("/delVaccine", methods=["POST"])
+def delVaccine():
+    if request.method == "POST":
+        if "delete_vaccine" in request.form:
+            del_list = request.form.getlist("delete_vaccine")
+            hsp_prof.hsp_info.update({'email': session['user']}, {
+                "$pull": {'list_vaccines': {'$in': del_list}}
+            })
+    return redirect(url_for('hsppanel'))
+
+
+@app.route("/addVaccine", methods=["POST"])
+def addVaccine():
+    if request.method == "POST":
+        single_vaccine = request.form.get("new_vaccine")
+        mul_vaccine = request.form.get("new_vaccines")
+        add_list = []
+        print(single_vaccine, mul_vaccine)
+        if mul_vaccine != "":
+            add_list = list(mul_vaccine.split(','))
+        if single_vaccine != "":
+            add_list.append(single_vaccine)
+        if add_list != []:
+            hsp_prof.hsp_info.update({'email': session['user']}, {
+                "$push": {'list_vaccines': {'$each': add_list}}
+            })
+        print(add_list)
+    return redirect(url_for('hsppanel'))
 
 
 @app.route("/logout")
