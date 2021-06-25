@@ -73,7 +73,9 @@ def sign():
         'gender': request.form.get('gen'),
         'emai_id': request.form.get('exampleInputEmail1'),
         'phone_no': request.form.get('pno'),
-        'password': request.form.get('exampleInputPassword1')
+        'password': request.form.get('exampleInputPassword1'),
+        'done': []
+
     }
 
     profiles.user_collection.insert_one(user)
@@ -91,7 +93,8 @@ def hspsign():
         'location': request.form.get('location'),
         'state': request.form.get('state'),
         'phno': request.form.get('phno'),
-        'password': request.form.get('password')
+        'password': request.form.get('password'),
+        'list_vaccines': []
     }
 
     hsp_prof.hsp_info.insert_one(h_user)
