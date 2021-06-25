@@ -42,10 +42,10 @@ def home():
     msg['from'] = user
     password = "luoowuavjstxrifp"
     server = smtplib.SMTP("smtp.gmail.com", 587)
-    # server.starttls()
-    # server.login(user, password)
-    # server.send_message(msg)
-    # server.quit()
+    server.starttls()
+    server.login(user, password)
+    server.send_message(msg)
+    server.quit()
     return render_template("index.html")
 
 
