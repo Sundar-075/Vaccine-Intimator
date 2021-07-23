@@ -32,21 +32,47 @@ today = date.today()
 
 @app.route("/")
 def home():
-    body = "It seems like you have delayed your vaccination. Please get yourself or your offspring vaccinated. Thank you :)"
-    subject = "Remainder for vaccination"
-    msg = EmailMessage()
-    msg['subject'] = subject
-    msg.set_content(body)
-    msg['to'] = "jkarunakar57@gmail.com"
-    user = "sundarsai364@gmail.com"
-    msg['from'] = user
-    password = "luoowuavjstxrifp"
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login(user, password)
-    server.send_message(msg)
-    server.quit()
-    return render_template("index.html")
+    values = profiles.user_collection.find()
+    remind_vaccine = vaccines.vaccine_info.find()
+    for i in values:
+        # print(i)
+        dob = str(i['dob'])
+        # print(dob)
+        t_d = today.strftime("%Y-%m-%d")
+        dob = list(dob.split("-"))
+        t_d = list(t_d.split("-"))
+        time_diff = datetime.date(
+            int(dob[0]), int(dob[1]), int(dob[2]))-datetime.date(int(t_d[0]), int(t_d[1]), int(t_d[2]))  # converts to days
+        # print(time_diff)
+        days = abs(time_diff.days)
+        # print(days)
+        months = days/30
+        remind = False
+        for vac in remind_vaccine:
+            if vac['age'] <= months:
+                val = vac["Vaccine_name"]
+                val = val[1:-1]
+                val = list(val.split(','))
+                for si in val:
+                    if si not in i['done']:
+                        remind = True
+                        break
+        if remind == True:
+            body = "It seems like you have delayed your vaccination. Please get yourself or your offspring vaccinated. Thank you :)"
+            subject = "Remainder for vaccination"
+            msg = EmailMessage()
+            msg['subject'] = subject
+            msg.set_content(body)
+            msg['to'] = i['emai_id']
+            user = "sundarsai364@gmail.com"
+            msg['from'] = user
+            password = "luoowuavjstxrifp"
+            server = smtplib.SMTP("smtp.gmail.com", 587)
+            server.starttls()
+            server.login(user, password)
+            server.send_message(msg)
+            server.quit()
+        return render_template("index.html")
 
 
 @app.route("/login")
@@ -141,7 +167,7 @@ def hsppanel():
         # hsp_name['list_vaccines'].append(i)
 
         # hsp_prof.hsp_info.replace_one({'email': session['user']}, hsp_name)
-        print(hsp_name)
+        # print(hsp_name)
 
         return render_template("hospital_land.html", val=hsp_name)
     return redirect(url_for('login'))
